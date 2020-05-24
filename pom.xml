@@ -8,6 +8,14 @@
     <artifactId>file-handling</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub ghacupha Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/ghacupha/file-handling</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <!-- Build properties -->
         <maven.version>3.3.9</maven.version>
