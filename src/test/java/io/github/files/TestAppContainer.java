@@ -1,6 +1,7 @@
 package io.github.files;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -50,13 +51,8 @@ public class TestAppContainer {
     private FileUploadResource fileUploadResource;
 
     @Autowired
+    @Qualifier("translatedExceptions")
     private TranslatedExceptions translatedExceptions;
-
-//    @Bean
-//    public Validator validator() {
-//
-//        return new
-//    }
 
     @Bean
     public MappingJackson2HttpMessageConverter jacksonMessageConverter() {
