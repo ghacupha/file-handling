@@ -2,7 +2,6 @@ package io.github.files;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.validation.ValidatorAdapter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,9 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.CustomValidatorBean;
-import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -54,7 +50,7 @@ public class TestAppContainer {
     private FileUploadResource fileUploadResource;
 
     @Autowired
-    private ExceptionTranslator exceptionTranslator;
+    private TranslatedExceptions translatedExceptions;
 
 //    @Bean
 //    public Validator validator() {
@@ -77,7 +73,7 @@ public class TestAppContainer {
     public MockMvc restFileUploadMockMvc() {
         return MockMvcBuilders.standaloneSetup(fileUploadResource)
                 .setCustomArgumentResolvers(pageableArgumentResolver())
-                .setControllerAdvice(exceptionTranslator)
+                .setControllerAdvice(translatedExceptions)
                 .setConversionService(createFormattingConversionService())
                 .setMessageConverters(jacksonMessageConverter()).build();
 //                .setValidator(validator()).build();
@@ -88,7 +84,7 @@ public class TestAppContainer {
     public MockMvc restFileTypeMockMvc() {
         return MockMvcBuilders.standaloneSetup(fileTypeResource)
                 .setCustomArgumentResolvers(pageableArgumentResolver())
-                .setControllerAdvice(exceptionTranslator)
+                .setControllerAdvice(translatedExceptions)
                 .setConversionService(createFormattingConversionService())
                 .setMessageConverters(jacksonMessageConverter()).build();
 //                .setValidator(validator()).build();
